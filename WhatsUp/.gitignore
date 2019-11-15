@@ -1,0 +1,5 @@
+/coverage
+/.vscode
+*.pyc
+.DS_Store
+.venv

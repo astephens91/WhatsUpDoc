@@ -1,0 +1,51 @@
+.titles {
+  color: purple;
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  width: 100vw;
+  background-color: #d6efff;
+}
+
+#navbar li {
+  list-style-type: none;
+  margin: 0 2vw;
+  font-size: 3vh;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: black;
+  padding: 2vw;
+  font-family: monospace;
+}
+
+#navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#navbar a:hover {
+  text-decoration: none;
+  color: red;
+  font-family: monospace;
+}
+
+.tickets ul {
+    margin: 0;
+    padding: 0;
+}
+
+.tickets li{
+    list-style-type: none;
+    margin: 0 2vw;
+    font-size: 3vh;
+}
+
+body {
+    margin: 0;
+}

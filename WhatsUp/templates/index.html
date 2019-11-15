@@ -1,0 +1,55 @@
+<link rel='stylesheet' href='/static/style.css'>
+
+<h1 class="titles">FIND THE BUGS, WRITE THE BUGS, SQUASH THE BUGS</h1>
+
+<nav id="navbar">
+    <ul>
+        <li><a href="ticketadd/">ADD A TICKET</a></li>
+       
+        {% if not user.is_authenticated %}
+            <li><a href="login/">LOGIN</a></li>
+        {% elif user.is_authenticated %}
+            <li><a href="logout/">LOGOUT</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<ul class="tickets">
+    {% for tickets in new %}
+        <li><h2><a href="ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        <li><p>Status: New</p></li>
+        {% if tickets.assigned_user is not None%}
+            <li><p> Assigned User: <a href="user/{{tickets.assigned_user.id}}/">{{ tickets.assigned_user }}</a></p></li>
+        {% else %}
+            <li><p> Assigned User: {{ tickets.assigned_user }}</p></li>
+        {% endif %}
+        <li><p>Created by: <a href="user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a>
+        <li><p><a href="edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+    {% for tickets in in_progress %}
+        <li><h2><a href="ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        <li><p>Status: In Progress</p></li>
+        <li><p> Assigned User: <a href="user/{{tickets.assigned_user.id}}/">{{ tickets.assigned_user }}</a></p></li>
+        <li><p>Created by: <a href="user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a></p></li>
+        <li><p><a href="edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+    {% for tickets in done %}
+        <li><h2><a href="ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        <li><p>Status: Done</p></li>
+        <li><p> Assigned User: {{ tickets.assigned_user }}</p></li>
+        <li><p>Created by: <a href="user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a></p></li>
+        <li><p>Finished By: <a href="user/{{tickets.finished_by.id}}/">{{ tickets.finished_user }}</a></p></li>
+        <li><p><a href="edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+    {% for tickets in invalid %}
+        <li><h2><a href="ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        <li><p>Status: Invalid</p></li>
+        <li><p> Assigned User: {{ tickets.assigned_user }}</p></li>
+        <li><p>Created by: <a href="user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a></p></li>
+        <li><p><a href="edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+</ul>

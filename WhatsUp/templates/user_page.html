@@ -1,0 +1,50 @@
+<a href="/">HOME</a>
+<br><br>
+
+<ul>
+    <h1>Tickets Created</h1>
+    {% for tickets in created %}
+        
+        <li><h2><a href="/ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        {% if tickets.ticket_status == "IP" %}
+            <li><p>Status: In Progress</p></li>
+        {% elif tickets.ticket_status == "N" %}
+            <li><p>Status: New</p></li>
+        {% elif tickets.ticket_status == "D" %}
+            <li><p>Status: Done</p></li>
+        {% endif %}
+        {% if tickets.assigned_user is not None%}
+            <li><p> Assigned User: <a href="/user/{{tickets.assigned_user.id}}/">{{ tickets.assigned_user }}</a></p></li>
+        {% else %}
+            <li><p> Assigned User: {{ tickets.assigned_user }}</p></li>
+        {% endif %}
+        <li><p>Created by: <a href="/user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a>
+        <li><p><a href="/edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+    <h1>Tickets Assigned</h1>
+    {% for tickets in assigned %}
+        
+        <li><h2><a href="/ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        {% if tickets.ticket_status == "IP" %}
+            <li><p>Status: In Progress</p></li>
+        {% elif tickets.ticket_status == "N"%}
+            <li><p>Status: New</p></li>
+        {% endif %}
+        <li><p> Assigned User: <a href="/user/{{tickets.assigned_user.id}}/">{{ tickets.assigned_user }}</a></p></li>
+        <li><p>Created by: <a href="/user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a></p></li>
+        <li><p><a href="/edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+    <h1>Tickets Finished</h1>
+    {% for tickets in finished %}
+        
+        <li><h2><a href="/ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2></li>
+        <li><p>{{ tickets.description }}</p></li>
+        <li><p>Status: Done</p></li>
+        <li><p> Assigned User: {{ tickets.assigned_user }}</p></li>
+        <li><p>Created by: <a href="/user/{{tickets.created_by.id}}/">{{ tickets.created_by }}</a></p></li>
+        <li><p>Finished By: <a href="/user/{{tickets.finished_by.id}}/">{{ tickets.finished_user }}</a></p></li>
+        <li><p><a href="/edit/{{tickets.id}}">EDIT</a></p></li>
+    {% endfor %}
+</ul>

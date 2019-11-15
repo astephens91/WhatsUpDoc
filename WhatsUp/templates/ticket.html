@@ -1,0 +1,11 @@
+
+
+<a href="/">HOME</a>
+{% for items in ticket %}
+    <h1>{{items.title}} by <a href="/user/{{items.created_by.id}}/" >{{items.created_by}}</a></h1>
+    <br><br>
+    <p>{{items.description}}</p>
+    <br>
+    <p><em>Created on: {{ items.post_date }}</em></p>
+    <li><p><a href="/edit/{{items.id}}">EDIT</a></p></li>
+{% endfor %}
